@@ -9,7 +9,7 @@ headers = {
 
 repo_owner = "skylord0001"
 repo_name = "some-github-script"
-usernames_file = "one.json"
+usernames_file = "three.json"
 
 mentions = 0
 usernames = []
@@ -22,7 +22,7 @@ for username in data:
     if len(usernames)%50 == 0:
         
         # Create an issue
-        issue_data = {"title": "Automated Issue", "body": "This issue was created by a test script."}
+        issue_data = {"title": "Automated Issue (Come to Python)", "body": "![image](https://github.com/user-attachments/assets/3d4e72a2-8333-4f10-beef-14849bb600db)."}
         issue_response = requests.post(f"https://api.github.com/repos/{repo_owner}/{repo_name}/issues", headers=headers, json=issue_data)
         issue = issue_response.json()
         issue_number = issue.get("number")
@@ -35,7 +35,7 @@ for username in data:
 
         # Add comments to the issue
         users = " ".join(usernames)
-        comment = f"{users}\n\n\nHi all,\n\nThis is an automated Python script just testing stuff. You're mentioned here because you recently joined GitHub and have 1 to 3 repositories containing at least one Python project.\n\nNice! You won't receive further notifications from this. Anyway, feel free to check out some of my Python projects here: https://github.com/devfemibadmus and give them some stars if you find them interesting! :heart: :smile:"
+        comment = f"{users}\n\n\nHi all,\n\n ![image](https://github.com/user-attachments/assets/3d4e72a2-8333-4f10-beef-14849bb600db)\n\nfeel free to check out some of my Python projects here: https://github.com/devfemibadmus and give them some stars if you find them interesting! :heart: :smile:"
         mentions += len(usernames)
         response = requests.post(f"https://api.github.com/repos/{repo_owner}/{repo_name}/issues/{issue_number}/comments", headers=headers, json={"body": comment})
         response = response.json()
@@ -48,5 +48,5 @@ for username in data:
         requests.put(f"https://api.github.com/repos/{repo_owner}/{repo_name}/issues/{issue_number}/lock", headers=headers)
         print("<<<<<<<<<<<<<<<<<<<<<<===============================================================================>>>>>>>>>>>>>>>>>>>")
         print(f"Issue #{issue_number} closed and locked.")
-        time.sleep(11)
+        time.sleep(15)
 
